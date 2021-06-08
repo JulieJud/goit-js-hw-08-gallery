@@ -39,7 +39,7 @@ function makeGalleryMarkup(images) {
     .join('');
 }
 
-//get url
+
 
 function onGalleryContainerClick(event) {
       event.preventDefault();
@@ -87,7 +87,6 @@ let originImages = [];
 galleryItems.forEach(item => {
 originImages.push(item.original);
 });
-
 
 function scrollImages(event){
   let index = originImages .indexOf(lightboxImgEl.src);
