@@ -14,7 +14,7 @@ galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 galleryContainer.addEventListener('click', onGalleryContainerClick)
 window.addEventListener('click', openModalClick);
-window.addEventListener('keyup', EscapeClick);
+
 window.addEventListener('click', CloseModalClick);
 
 
@@ -50,27 +50,25 @@ function onGalleryContainerClick(event) {
 
   }
   
-  lightboxImgEl.src = event.target.dataset.source;;
+  lightboxImgEl.src = event.target.dataset.source;
   lightboxImgEl.alt = event.target.alt;
-  lightboxImgEl.dataset.index = event.target.dataset.index;
-   // lightbox.classList.add('is-open');
+  lightboxImgEl.dataset.index = event.target.dataset.index
+
 };
 
 
-function openModalClick (event) {
+function openModalClick(event) {
+  window.addEventListener('keyup', EscapeClick);
+  window.addEventListener('keyup', scrollImages)
+
   if (event.target.nodeName === 'IMG') {
     lightbox.classList.add('is-open');
   }
 }
 
 
-function EscapeClick (event) {
-  if (event.key === 'Escape') {
-    lightbox.classList.remove('is-open');
-  }
-};
 
-function CloseModalClick (event) {
+function CloseModalClick(event) {
   if (event.target.nodeName !== 'IMG') {
     lightbox.classList.remove('is-open');
 
@@ -78,3 +76,36 @@ function CloseModalClick (event) {
     lightboxImgEl.alt = '';
   }
 }
+
+function EscapeClick (event) {
+  if (event.key === 'Escape') {
+    lightbox.classList.remove('is-open');
+  }
+};
+
+let originItems = [];
+galleryItems.forEach(item => {
+originItems.push(item.original);
+});
+
+
+function scrollImages(event){
+  let index = originItems.indexOf(lightboxImgEl.src);
+
+  if (event.key === 'ArrowRight') {
+    if (index < originItems.length - 1) {
+     lightboxImgEl.setAttribute("src", originItems[index + 1]);
+    } else {
+      index = -1;
+      lightboxImgEl.setAttribute("src", originItems[index + 1]);
+    }
+  }
+
+  if (event.key === 'ArrowLeft') {
+    if (index === 0) {
+      index = originItems.length;
+     lightboxImgEl.setAttribute("src", originItems[index - 1]);
+    } else lightboxImgEl.setAttribute("src", originItems[index - 1]);
+  }
+}
+
