@@ -83,29 +83,29 @@ function EscapeClick (event) {
   }
 };
 
-let originItems = [];
+let originImages = [];
 galleryItems.forEach(item => {
-originItems.push(item.original);
+originImages.push(item.original);
 });
 
 
 function scrollImages(event){
-  let index = originItems.indexOf(lightboxImgEl.src);
+  let index = originImages .indexOf(lightboxImgEl.src);
 
   if (event.key === 'ArrowRight') {
-    if (index < originItems.length - 1) {
-     lightboxImgEl.setAttribute("src", originItems[index + 1]);
+    if (index < originImages .length - 1) {
+     lightboxImgEl.setAttribute("src", originImages [index + 1]);
     } else {
       index = -1;
-      lightboxImgEl.setAttribute("src", originItems[index + 1]);
+      lightboxImgEl.setAttribute("src", originImages [index + 1]);
     }
   }
 
   if (event.key === 'ArrowLeft') {
     if (index === 0) {
-      index = originItems.length;
-     lightboxImgEl.setAttribute("src", originItems[index - 1]);
-    } else lightboxImgEl.setAttribute("src", originItems[index - 1]);
+      index = originImages .length;
+     lightboxImgEl.setAttribute("src",originImages [index - 1]);
+    } else lightboxImgEl.setAttribute("src", originImages [index - 1]);
   }
 }
 
