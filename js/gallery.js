@@ -13,6 +13,7 @@ const galleryMarkup = makeGalleryMarkup(galleryItems);
 galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 galleryContainer.addEventListener('click', onGalleryContainerClick)
+window.addEventListener('click', openModalClick);
 window.addEventListener('keyup', EscapeClick);
 window.addEventListener('click', CloseModalClick);
 
@@ -52,10 +53,16 @@ function onGalleryContainerClick(event) {
   lightboxImgEl.src = event.target.dataset.source;;
   lightboxImgEl.alt = event.target.alt;
   lightboxImgEl.dataset.index = event.target.dataset.index;
-  lightbox.classList.add('is-open');  
- 
-
+   // lightbox.classList.add('is-open');
 };
+
+
+function openModalClick (event) {
+  if (event.target.nodeName === 'IMG') {
+    lightbox.classList.add('is-open');
+  }
+}
+
 
 function EscapeClick (event) {
   if (event.key === 'Escape') {
@@ -70,4 +77,4 @@ function CloseModalClick (event) {
     lightboxImgEl.src = '';
     lightboxImgEl.alt = '';
   }
-};
+}
